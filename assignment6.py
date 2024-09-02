@@ -63,7 +63,7 @@ while value!=0:
         print("the sorted list:",answer)
         value=int(input("enter the value:"))
     elif(menu==3):
-        array=insertion_sort(list,n)
+        array=insertion_sort(n,list)
         print("the sorted list:",array)
         value=int(input("enter the value:"))
     elif(menu==4):
