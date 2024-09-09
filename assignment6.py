@@ -67,24 +67,51 @@ def shell_sort(list,n):
 def radix_bucket_sort(list,n):
     count=0
     number=1
-    max=max(list)
-    while(max!=0):
-        max=max//10
+    max_val=max(list)
+    while(max_val!=0):
+        max_val=max_val//10
         count+=1
     while(count!=0):
-        for i in range(0,10):
-            bucket=[]
-            for j in range(0,n):
-                q=list[j]//number
-                r=list[j]%10
-                bucket[r].append(list[j])
-        for i in range (0,n):
-            for j in range(0,10):
-                list[i]=bucket[j].pop(0)
+        bucket=[[]for i in range(0,10)]
+        for j in range(0,n):
+            q=list[j]//number
+            r=list[j]%10
+            bucket[r].append(list[j])
+        index=0
+        for b in bucket:
+            for item in b:
+                list[index]=item
+                index+=1
         number=number*10
         count-=1
     return list
+def quick_sort(list,n):
+    def partition(low, high):
+        pivot = list[high]
+        i = low - 1
+        for j in range(low, high):
+            if list[j] <= pivot:
+                i += 1
+                list[i], list[j] = list[j],;list[i]
+        list[i + 1], list[high] = list[high], list[i + 1]
+        return i + 1
+def radi_counting_sort(list,n):
+    count=0
+    number=10
+    max_val=max(list)
+    while(max_val!=0):
+        max_val=max_val//10
+        count+=1
+    while(count!=0):
+        count=[]
+        number=1
+        for j in range(0,n):
+            r=list[i]%number
+            count[r]+=1
+        for i in range (0,10):
+            count[i]=count[i]+count[i-1]
 
+    
 n=int(input("Enter the number of element of the list:"))
 value=int(input("enter the value:"))
 list=[]
