@@ -97,20 +97,30 @@ def quick_sort(list,n):
         return i + 1
 def radi_counting_sort(list,n):
     count=0
-    number=10
+    number=1
+    arr=[]
     max_val=max(list)
     while(max_val!=0):
         max_val=max_val//10
         count+=1
     while(count!=0):
-        count=[]
-        number=1
+        count=[0]*10
         for j in range(0,n):
-            r=list[i]%number
+            r=(list[j]//number)%10
+            list[j]=list
             count[r]+=1
         for i in range (0,10):
             count[i]=count[i]+count[i-1]
-
+        for k in range(n-1,-1,-1):
+            r=(list[k]//number)%10
+            count[r]-=1
+            arr[count[r]]=list[k]
+        for i in range(0,n):
+            list[i]=arr[i]
+        number=number*10
+        count=-1
+    return list
+    
     
 n=int(input("Enter the number of element of the list:"))
 value=int(input("enter the value:"))
@@ -140,4 +150,7 @@ while value!=0:
         crray=radix_bucket_sort(list,n)
         print("the sorted list:",crray)
         value=int(input("enter the value:"))
-    
+    elif(menu==6):
+        drray=radi_counting_sort(list,n)
+        print("the sorted list:",crray)
+        value=int(input("enter the value:"))
