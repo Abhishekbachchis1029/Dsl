@@ -29,6 +29,7 @@ def Selection_sort(n,list):
             count+=1
     print("the total count:",count)
     return list
+# insertion sort
 def insertion_sort(n,list):
     count=0
     for i in range(1,n):
@@ -43,7 +44,7 @@ def insertion_sort(n,list):
         list[j+1]=temp
     print("the total count:",count)
     return list
-
+# shell short
 def shell_sort(list,n):
     count=0
     gap=n//2
@@ -64,7 +65,9 @@ def shell_sort(list,n):
         gap=gap//2
     print("the total count:",count)
     return list
+#radix sort using bucket sort
 def radix_bucket_sort(list,n):
+    count2=0
     count=0
     number=1
     max_val=max(list)
@@ -82,46 +85,46 @@ def radix_bucket_sort(list,n):
             for item in b:
                 list[index]=item
                 index+=1
+        print("the array after each pass:",list)
         number=number*10
         count-=1
+        count2=count2+1
+    print("count of passes=",count2)
     return list
-def quick_sort(list,n):
-    def partition(low, high):
-        pivot = list[high]
-        i = low - 1
-        for j in range(low, high):
-            if list[j] <= pivot:
-                i += 1
-                list[i], list[j] = list[j],;list[i]
-        list[i + 1], list[high] = list[high], list[i + 1]
-        return i + 1
-def radi_counting_sort(list,n):
+
+# radix sort using counting sort
+def radix_counting_sort(list,n):
     count=0
     number=1
-    arr=[]
+    arr=[0]*n
+    count2=0
     max_val=max(list)
     while(max_val!=0):
         max_val=max_val//10
         count+=1
-    while(count!=0):
+    while(count>0):
         count=[0]*10
         for j in range(0,n):
             r=(list[j]//number)%10
-            list[j]=list
             count[r]+=1
         for i in range (0,10):
             count[i]=count[i]+count[i-1]
         for k in range(n-1,-1,-1):
             r=(list[k]//number)%10
+            arr[count[r]-1]=list[k]
             count[r]-=1
-            arr[count[r]]=list[k]
         for i in range(0,n):
             list[i]=arr[i]
+        print("the array after each pass:",list)
         number=number*10
         count=-1
+        count2+=1
+    print("count of passes=",count2)
     return list
     
-    
+# quick sort
+def Quick_sort(list,n):
+
 n=int(input("Enter the number of element of the list:"))
 value=int(input("enter the value:"))
 list=[]
@@ -151,6 +154,10 @@ while value!=0:
         print("the sorted list:",crray)
         value=int(input("enter the value:"))
     elif(menu==6):
-        drray=radi_counting_sort(list,n)
-        print("the sorted list:",crray)
+        drray=radix_counting_sort(list,n)
+        print("the sorted list:",drray)
+        value=int(input("enter the value:"))
+    elif(menu==7):
+        erray=Quick_sort(list,n)
+        print("the sorted list:",erray)
         value=int(input("enter the value:"))
