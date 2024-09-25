@@ -121,9 +121,33 @@ def radix_counting_sort(list,n):
         count2+=1
     print("count of passes=",count2)
     return list
-    
+# swap function
+
+def swap(arr, i, j):
+    arr[i], arr[j] = arr[j], arr[i]
+   
+#partion index_function
+def partition(brr,low,high):
+    pivot=brr[low]
+    left=low+1
+    right=high
+    while(left<=right):
+        while( left<=right and brr[left]<pivot):
+            left+=1
+        while( right>=left and brr[right]>=pivot):
+            right-=1
+        if(left<right):
+            swap(brr,left,right)
+    swap(brr,low,right)
+    return right
+
 # quick sort
-def Quick_sort(list,n):
+def Quick_sort(arr,low,high):
+    if(low<high):
+        pivot=arr[low]
+        Pindex=partition(arr,low,high)
+        Quick_sort(arr,low,Pindex-1)
+        Quick_sort(arr,Pindex+1,high)
 
 n=int(input("Enter the number of element of the list:"))
 value=int(input("enter the value:"))
@@ -158,6 +182,9 @@ while value!=0:
         print("the sorted list:",drray)
         value=int(input("enter the value:"))
     elif(menu==7):
-        erray=Quick_sort(list,n)
-        print("the sorted list:",erray)
+        low=0
+        high=n-1
+        Quick_sort(list,low,high)
+        print("the sorted list:",list)
         value=int(input("enter the value:"))
+        
